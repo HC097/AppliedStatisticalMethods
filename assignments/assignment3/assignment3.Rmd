@@ -1,0 +1,455 @@
+---
+title: "assignment3"
+author: "Harley Combest"
+date: "`r Sys.Date()`"
+output: 
+    html_document:
+      toc: yes
+      toc_float: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# 13/16
+
+## Question 1 (MS 5.54 - pg 215)
+
+### a.
+
+```{r}
+prob1=exp(-120/95)
+prob1
+```
+
+### b.
+
+```{r}
+fish=read.csv("PHISHING.csv")
+mean(fish$INTTIME)#B=95ish
+sd(fish$INTTIME)#B=91ish
+```
+
+The data almost follows an exponential distribution with beta equal to 95 but it's a bit off in the mean and variance. There might be some collaboration or collusion from within the company.
+
+## Question 2 (MS 5.56 - Page 215)
+
+### a.
+
+```{r}
+mean1=(3)*(.07)#mean=.21
+mean1
+var1=(3)*(.07)^2#variance=.0147
+var1
+```
+
+### b.
+
+```{r}
+mean1+3*(sqrt(var1))
+mean1-3*(sqrt(var1))
+```
+
+I wouldn't expect that and that seems to be an outlier as that value is beyond 3 standard deviations of the mean.
+
+## Question 3 (MS 5.60 - Page 216)
+
+### a.
+
+```{r}
+mean2=(2)*(2)#mean for A
+mean2
+mean3=(1)*(4)#mean for B
+mean3
+```
+
+The mean for both formulai is 4.
+
+### b.
+
+```{r}
+var2=(2)*(2)^2
+var2
+var3=(1)*(4)^2
+var3
+```
+
+var(formula A)=8 and var(formula B)=16.
+
+### c.
+
+```{r}
+fctn1 <- function(y){
+  (1/4)*y*exp(-y/2)
+}
+prob2=integrate(fctn1, lower=0, upper=1)
+prob2#formula A
+
+fctn2 <- function(y){
+  (1/4)*exp(-y/4)
+}
+prob3=integrate(fctn2, lower=0, upper=1)
+prob3#formula B
+```
+
+P(Y<1|B)>P(Y<1|A):formula B has higher probability of generating a human reaction in less than 1 minute.
+
+## Question 4 (MS 5.74 - Page 219)
+
+### a. 
+
+```{r}
+fctn3<-function(x){(1/2)*x*exp((-x^2)/4)}
+prob4=integrate(fctn3,lower=0,upper=2)
+prob4
+```
+
+### b.
+
+```{r}
+mean4=(4)^(1/2)*.88623#obtained from table 6 appendix B
+mean4
+var4=(4)*(1-.88623^2)
+sd1=sqrt(var4)
+sd1
+```
+
+### c.
+
+```{r}
+fctn4<-function(x){(1/2)*x*exp((-x^2)/4)}
+prob5=integrate(fctn4,lower=mean4-(2*sd1),upper=mean4+(2*sd1))
+prob5
+
+mean4-(2*sd1)
+mean4+(2*sd1)
+```
+
+### d.
+
+```{r}
+prob6=integrate(fctn4,lower=0, upper=6)
+prob6
+
+1-.9998766
+```
+
+It's not very likely.
+
+## Question 5.
+
+### a.
+
+```{r}
+mean5=2/(2+9)
+mean5
+var5=(2*9)/(((2+9)^2)*(2+9+1))
+var5
+```
+
+### b.
+
+```{r}
+fctn5 <- function(x){x*(1-x)^8}
+integrate(fctn5,lower=0, upper=1)
+fctn6 <- function(x){(x*(1-x)^8)/((0.01111111))}
+prob7=integrate(fctn6,lower=0,upper=.40)
+prob7
+
+1-.9536427
+```
+
+### c.
+
+```{r}
+prob8=integrate(fctn6,lower=0,upper=.10)
+prob8
+```
+
+## Question 6 (MS 5.114 - Page 232)
+
+### a.
+
+```{r}
+
+```
+
+alpha = 2 and beta = 16
+
+### b.
+
+```{r}
+mean5=((16)^(1/2))*.88623#table 6 appendix B
+mean5
+var5=(16)*(1-.88623^2)#table 6 appendix B
+var5
+```
+
+### c.
+
+```{r}
+fctn7<-function(x){(1/8)*x*exp((-x^2)/16)}
+prob9=integrate(fctn7,lower=0,upper=6)
+prob9
+1-0.8946008
+```
+
+## Question 7 (MS 6.2 - Page 239)
+
+### a.
+
+```{r}
+
+```
+
+$$p(x,y)=\frac{1}{36},1\leq x\leq36,1\leq y \leq 36$$
+
+### b.
+
+```{r}
+
+```
+
+$$
+p_1(x)=\sum_{x=0}^{6}\frac{1}{36}=\frac{6}{36}=\frac{1}{6}, 1\leq x \leq 36\\
+p_2(y)=\sum_{y=0}^{6}\frac{1}{36}=\frac{6}{36}=\frac{1}{6}, 1\leq y \leq 36
+$$
+
+### c.
+
+```{r}
+
+```
+
+$$
+p_1(x|y)=\frac{p(x, y)}{p_2(y)}=\frac{\frac{1}{36}}{\frac{1}{6}}=\frac{1}{6}\\
+p_2(x|y)=\frac{p(x, y)}{p_1(y)}=\frac{\frac{1}{36}}{\frac{1}{6}}=\frac{1}{6}
+$$
+
+### d.
+
+```{r}
+
+```
+
+$$
+\bullet \;p_1(x)=p_1(x|y)\;and\;p_2(y)=p_2(y|x)\\
+\bullet \; p(x, y)=p_1(x)p_2(y)
+$$
+
+Due to the fulfillment of the listed conditions, x and y are independent.
+
+## Question 8
+
+### a.
+
+```{r}
+
+```
+
+$$
+p(1,1)=\frac{1}{7}\\
+p(1,2)=0\\
+p(1,3)=0\\
+\\------------\\
+p(2,1)=\frac{2}{7}\\
+p(2,2)=0\\
+p(2,3)=0\\
+\\------------\\
+p(3,1)=\frac{1}{7}\\
+p(3,2)=\frac{2}{7}\\
+p(3,3)=\frac{1}{7}\\
+$$
+
+### b.
+
+```{r}
+
+```
+
+$$
+p_1(x)\\
+p_1(1)=\frac{1}{7}\\
+p_1(2)=\frac{2}{7}\\
+p_1(3)=\frac{4}{7}
+$$
+
+### c.
+
+```{r}
+
+```
+
+$$
+p_2(y)\\
+p_2(1)=\frac{4}{7}\\
+p_2(2)=\frac{2}{7}\\
+p_2(3)=\frac{1}{7}
+$$
+
+### d.
+
+```{r}
+
+```
+
+$$
+p_2(y|x)=\frac{p(x,y)}{p_1(x)}
+\\------------\\
+p(1|1)=1\\
+p(1|2)=1\\
+p(1|3)=\frac{1}{4}\\
+\\------------\\
+p(2|1)=0\\
+p(2|2)=0\\
+p(2|3)=\frac{1}{2}\\
+\\------------\\
+p(3,1)=0\\
+p(3,2)=0\\
+p(3,3)=\frac{1}{4}\\
+$$
+
+## Question 9. (MS 6.12 - Page 244)
+
+### a.
+
+```{r}
+
+```
+
+$$
+f(y)=\int_{y}^{2y}f(x,y)dx=\int_{y}^{2y}\frac{e^{\frac{-y}{10}}}{10y}dx=\frac{e^{\frac{-y}{10}}}{10y}*(2y-y)=\frac{e^{\frac{-y}{10}}}{10}
+$$
+
+### b.
+
+```{r}
+
+```
+
+
+$$
+\lambda=\frac{1}{10} \implies E(Y)=\frac{1}{\lambda}=10
+$$
+
+## Question 10 (MS 6.14 - Page 245)
+
+### a.
+
+```{r}
+
+```
+
+$$
+\int_{0}^{\infty}\int_{0}^{x}ce^{-x^2}dydx=\int_{0}^{\infty}xce^{-x^2}dx=\int_{0}^{\infty}\frac{c}{2}e^{-t}dx=\frac{c}{2}=1\\\implies\\c=2
+$$
+
+### b.
+
+```{r}
+
+```
+
+$$
+f_1(x)=\int_{0}^{x}2e^{-x^2}dydx=2xe^{-x^2} \implies \int_{-\infty}^{\infty}f_1(x)dx=1
+$$
+
+### c.
+
+```{r}
+
+```
+
+$$
+f_2(y|x)=\frac{f(x,y)}{f_1(x)}=\frac{2e^{-x^2}}{x2e^{-x^2}}=\frac{1}{x}
+$$
+
+## Question 11 (MS 6.51 - Page 253)
+
+```{r}
+
+```
+
+$$
+E(X)=\sum x P(X=x)=0\\
+E(Y)=\sum y P(Y=y)=0\\
+E(XY)=\sum xy P(X=x, Y=y)=0\\ \implies\\
+COV(X,Y)=E(XY)-E(X)E(Y)=0
+$$
+but we also have
+
+$$
+P(X=x, Y=y) \neq P(X=x)*P(Y=y)\\
+[ex:P(X=-1, Y=-1) \neq P(X=-1)*P(Y=-1) \iff\frac{1}{12} \neq \frac{1}{9})]
+$$
+
+for each x and y.
+
+This means X and Y are not independent.
+
+## Question 12 (MS 6.74 - Page 269)
+
+### a.
+
+$$
+E(\bar Y)=\mu=\frac{b+a}{2}=\frac{3+1}{2}=2
+$$
+There are, on average, 2 parts per million uranium in each reservoir.
+
+### b.
+
+$$
+Var(\bar Y)=\sigma ^2=\frac{\frac{(b-a)^2}{12}}{n}=\frac{\frac{(3-1)^2}{12}}{60}=\frac{\frac{1}{3}}{60}=\frac{1}{180}
+$$
+
+### c.
+
+By The Central Limit Theorem, Y-bar has a Normal Distribution.
+
+### d.
+
+$$
+P(1.5 \leq \bar Y \leq2.5)=P(\bar Y \leq 2.5) - P(\bar Y \leq 1.5)\\=P(\frac{2.5-2}{\sqrt{\frac{1}{180}}})-P(\frac{1.5-2}{\sqrt{\frac{1}{180}}})\\=P(Z \leq6.71)-P(Z\leq-6.71)\\1-0=1
+$$
+
+### e.
+
+$$
+P(\bar Y > 2.2)=1-P(\bar Y \leq 2.2)\\
+=1-P(\frac{2.2-2}{\sqrt{\frac{1}{180}}})\\
+=1-P(Z\leq2.68)\\
+=1-.9963=.0037
+$$
+
+## Question 13 (MS 6.90 - Page 273)
+
+### a.
+
+$$
+P(Z < \frac{(1+.5)-20*.4}{\sqrt{20*.4*.6}})=.0015
+$$
+
+### b.
+
+$$
+P(Z > \frac{(11-.5)-20*.4}{\sqrt{20*.4*.6}})=.1271
+$$
+
+### c.
+
+$$
+P(X<2)=.0005\\
+P(X>10)=.1275
+$$
+
+The normal approximation did a good job for the second one but pretty bad on the first.
+
+
+
+
+
+
+
+
+

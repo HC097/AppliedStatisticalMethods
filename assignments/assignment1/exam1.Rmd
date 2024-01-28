@@ -1,0 +1,129 @@
+---
+title: "Exam 1"
+author: "Harley Combest"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Question 1
+
+```{r pressure, echo=FALSE}
+mtbe <- read.csv("MTBE.csv")
+mtbe
+speci1 = with(mtbe, mtbe[mtbe$Aquifier=="Bedrock",])
+speci1
+speci2 = with(mtbe, mtbe[mtbe$WellClass=="Public",])
+speci2
+speci3 = with(speci2, speci2[speci2$Aquifier=="Bedrock",])
+speci3
+98/120
+```
+
+## Question 2
+
+```{r}
+speci4=with(mtbe, mtbe[mtbe$WellClass=="Private",])
+speci4
+speci5=with(speci4, speci4[speci4$MTBE.DETECT=="Below Limit",])
+speci5
+120/223
+```
+
+## Question 3
+
+```{r}
+speci6=with(mtbe, mtbe[mtbe$MTBE.Detect=="Below Limit" & mtbe$WellClass=="Private",])
+speci6
+81/223
+```
+
+## Question 4
+
+```{r}
+probIsWeed=(.93)*(.06)/(((.93)*(.06))+((.14)*(.94)))
+probIsWeed
+```
+
+## Question 5
+
+```{r}
+epagas<-read.csv("EPAGAS.csv")
+mean1=mean(epagas$MPG)
+sd1=sd(epagas$MPG)
+z=(epagas$MPG - mean1)/sd1
+zSus=with(epagas, epagas[abs(z) >= 2,])
+zSusMin=min(zSus)
+zSusMin
+```
+
+## Question 6
+
+```{r}
+bound1=mean+(3*sd1)
+epaBound1=with(epagas, epagas[abs(epagas$MPG) <= bound1,])
+epagas
+epaBound1
+```
+
+## Question 7
+
+```{r}
+bound2=mean+(1*sd1)
+epaBound2=with(epagas, epagas[abs(epagas$MPG) <= bound2, ])
+max(epaBound2)
+```
+
+## Question 8
+
+```{r}
+3/8
+```
+
+## Question 9
+
+```{r}
+(1 * 1.1 * 1.1 * 1.1)/8
+```
+
+## Question 10
+
+```{r}
+(2 * 2 * 2)/8
+(1)/8
+1-.125
+```
+
+## Question 11
+```{r}
+pnorm(13, mean=12, sd=4) - pnorm(8, mean=12, sd=4)
+```
+
+## Question 12
+
+```{r}
+
+```
+
+
+## Question 13
+
+```{r}
+3 + 6 -9
+```
+
+
+
+
+
+
+
+
+
+
+
+
+

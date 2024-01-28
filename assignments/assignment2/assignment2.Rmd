@@ -1,0 +1,376 @@
+---
+title: "Assignment2"
+author: "Harley Combest"
+date: "`r Sys.Date()`"
+output: 
+    html_document:
+      toc: yes
+      toc_float: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# 17/17
+
+
+## Question 1
+
+### (a)
+
+$$P(ExpertFail|MatchedPrints)=(100-92.12)\%=7.88\%$$
+
+### (b)
+
+$$P(NoviceFail|MatchedPrints)=(100-74.55)\%=25.45\%$$
+
+### (c)
+
+The participant is more likely to be a novice.
+
+## Question 2
+
+### (a)
+
+$$P(Positive|User)=50/100=.5$$
+
+### (b)
+
+$$P(Negative|Nonuser)=891/900=.99$$
+
+### (c)
+
+$$P(User|Positive)=\frac{P(Positive|User)P(User)}{P(Positive|User)P(User)+P(Positive|Nonuser)P(Nonuser)}=\frac{(.5)(.1)}{(.5)(.1)+(.01)(.99)}=0.8347245$$
+
+## Question 3
+
+Proof (Multiplicative Rule).
+
+We want to prove that the number of different samples that can be formed from k sets of elements (where n represents individual sets of elements) is equivalent to
+$$n_1n_2n_3\dots n_k. $$
+We have that the integers is an integral domain and, therein, has the multiplication operation such that for any integer n or m we have
+$$n*m=+^nm=m+m+\dots +m$$
+where m +...+ m represents n copies of m.
+
+
+Base Case-
+
+Suppose we have 
+$$n_1n_2.$$
+
+We have by the multiplication operation that this is equivalent to k=2 copies of n.
+
+
+Inductive Case-
+
+Let's if this works for k+1
+
+$$n_1n_2\dots n_{k+1}$$
+
+By the multiplication operation, we have that this is equivalent to k+1 copies of n.
+
+Therefore, the number of different samples that can be formed from k sets of elements (where n represents individual sets of elements) is equivalent to
+$$n_1n_2n_3\dots n_k. $$
+
+Q.E.D.
+
+## Question 4
+
+Proof(Permutations Rule).
+
+We want to prove that for a set of N distinct elements that the number of arrangements one can place n elements from N into n different positions is equal to 
+
+$$N(N-1)(N-2)\dots (N-n+1)=\frac{N!}{(N-n)!_.}$$
+
+We know from the previous theorem that the number of different samples we can form from a number of sets between sets is the product between the number of sets and the individual sets.
+
+Now for this proof, we want to find the number of arrangments of elements is 'distinct' order.
+
+
+Base Case-
+
+This means that for N ways of filling the first position we have N-1 ways of filling the second position.
+
+
+Inductive Case- 
+
+Suppose we want to fill up the n+1th space.
+
+We have
+$$N-(n+1)+1 = N-n$$
+ways of filling that space.
+
+Therefore, for a set of N distinct elements the number of arrangements one can place n elements from N into n different positions is equal to 
+
+$$N(N-1)(N-2)\dots (N-n+1)=\frac{N!}{(N-n)!_.}$$
+Q.E.D.
+
+## Question 5
+
+Proof (Partitions Rule).
+
+The number of ways on can partition a set of N elements into k sets is equal to
+
+$$\frac{N!}{n_1!n_2!\dots n_k}$$
+where
+$$n_1+n_2+\dots + n_k=N.$$
+
+Suppose we arrange N distinct elements into N positions.
+
+By The Permutations Rule, we have that there are
+
+$$P^N_N=\frac{N}{(N-N)!}=N!$$
+ways of doing this.
+
+It follows that there are
+$$n_1!$$
+
+ways of permuting a group with 
+$$n_1$$
+
+elements.
+
+Suppose that 
+$$N=n_1+n_2+\dots+n_k.$$
+
+We then have that the number of ways to partition N is equal to
+
+$$\frac{N!}{n_1!n_2!\dots n_k!}$$
+
+as desired.
+
+Q.E.D.
+
+## Question 6
+
+Proof(Combinations Rule).
+
+We want to show that the number of different samples of n elements that can be selected from N is equal to
+
+$$\frac{N!}{n!(N-n)!}.$$
+
+Unlike with permutations, the order in which the n elements are drawn doesn't matter.
+
+From The Permutations Rule, we have that the number ways we can arrange n elements from a set of N elements in a distinct order is equal to
+$$\frac{N!}{(N-n)!_.}$$
+
+Notice that what we are trying to prove is essentially a partition into two groups, one of which is (N-n) the number of elements not selected for the sample, is given.
+
+We have that the other group is n elements selected from the sample.
+
+By The Partitions Rule, we then have
+
+$$\frac{N!}{n!(N-n)!}$$
+
+as desired.
+
+Q.E.D.
+
+## Question 7
+
+### (a)
+
+$$.09+.30+.37+.20+.04=.39+.37+.24=.39+.61=1.00$$
+
+### (b)
+
+$$P(3\cup 4)=.20+.04=.24$$
+
+### (c)
+
+$$P(0\cup 1)=.09+.30=.39$$
+
+## Question 8
+
+### a
+
+Requirements for a Discrete Probability Distribution
+$$(1.)\; 0\leq p(y) \leq 1$$
+$$(2.)\sum_{all \; y}p(y)=1$$
+
+Each p(y) satisfies (1.).
+
+$$.17+.10+.11+.11+.10+.10+.07+.05+.03+.02+.02+.02+.02+.02+.01+.01+.01+.01+.01+.005+.005\\ = .27+.42+.15+.10+.05+.01\\=.69+.31=1.00$$
+
+The total p(y) satisfies (2.).
+
+### (b)
+
+$$P(Y\geq 10)= P(Y=10) +\dots+P(Y=20)\\=.02+.02+.02+.02+.01+.01+.01+.01+.01+.005+.005\\=.08+.05+.01=.14$$
+
+### (c)
+
+$$E(Y)=\sum_{all\; y}yp(y)=0(.17)+\dots +20(.005)\\=0+\dots +.1\\=.32+\dots +.195\\=1.05+ \dots +.545\\=2.56+1.55+.545\\=2.56+2.095\\=4.655$$
+
+$$V(Y)=E(Y^2)-E(Y)^2\\E(Y^2)=0^2(.17)+\dots+20^2(.005)=41.525\; and\;E(Y)^2=4.655*4.655=21.669025\\V(Y)=41.525-21.669025=19.855975$$
+
+### (d)
+
+$$P(?\leq Y \leq \;?)\geq.75\\P(0\leq Y\leq 6) = .76$$
+Tbh, I was thinking about just putting down the entire interval as that would fulfill the prompt but I get the feeling that ain't what we're looking for.
+
+## Question 9
+
+### (a)
+
+```{r}
+x=choose(25,10)*(.7)^10*(.3)^15
+x
+```
+
+
+$$P(Y=10)= {n\choose y}p^yq^{n-y}={25\choose 10}(.70)^{10}(.30)^{25-10}\approx 0.0013$$
+
+### (b)
+
+$$P(Y\leq 5)=P(Y=5)+\dots+P(Y=0)\\={25\choose 5}(.70)^{5}(.30)^{25-5}+\dots+ {25\choose0}(.70)^0(.30)^{25-0}\\ \approx3.457*10^{-7}$$
+
+### (c)
+
+$$\mu = np = (25)(.7) = 17.5\\ \delta=\sqrt{npq} =\sqrt{(25)(.7)(.3)}\approx2.2913$$
+
+### (d)
+
+On average, a random sample of 25 engineering students who recently earned their PhD will have roughly 17.5 foreign nationals.
+
+There won't be too much variation in this as the standard deviation is low and indicates that the values of the data are relatively close to the mean.
+
+## Question 10
+
+### (a)
+$$P(5, 5, 5, 5, 5, 5, 5, 5, 5, 5)= \frac{50!}{5!5!5!5!5!5!5!5!5!5!}(.1)^{5 *10} \approx 4.9121*10^{43}$$
+
+### (b)
+
+$$P(Y = 1) = \frac{50!}{1!49!}(.02)^{1}(.98)^{49}\approx.3716$$
+
+## Question 11
+
+### (a)
+
+The Geometric Probability Distribution with Y = Number of trials until first success is found.
+
+$$p(y)= pq^{y-1} = (.4)((45+15)/100)^{y-1} = (.4)(.6)^{y-1}$$
+
+### (b)
+
+$$E(Y) = \frac{1}{p} = \frac{1}{.4} = 2.5$$
+
+On average, it'll take roughly 2.5 consumers who must be interviewed until one indicates something other than information given directly on the product's label or packing as the reason a product is green.
+
+### (c)
+
+$$P(Y=1)=p(1)=(.4)(.6)^{1-1}=.4$$
+
+### (d)
+
+$$P(Y>2)= 1 -P(Y=2)-P(Y=1)=1-[(.4)(.6)^{2-1}]-.4=.36$$
+
+## Question 12
+
+### (a)
+
+$$\mu = \frac{nr}{N} = \frac{(10)(8)}{209}\approx .3828$$
+In an average sample of 10 facilities, roughly .3828 of them treat hazardous waste on sight.
+
+
+### (b)
+
+$$P(Y=4)=\frac{{r\choose y}{N-r\choose n-y}}{{N\choose n}}=\frac{{8\choose 4}{209-8\choose 10-4}}{{209\choose 10}}\approx1.6885*10^{-4}$$
+
+## Question 13
+
+### (a)
+
+$$\delta^2=\lambda=.03$$
+
+### (b)
+
+The number of casualties that occur in one deep-draft U.S. flag vessel over a 3-year period is independent of the number that occur in other deep-draft U.S. flag vessels.
+
+Another condition, is that the probability of a casualty in a given deep-draft U.S. flag vessel over a 3-year period is the same for all other deep-draft U.S. flag vessels.
+
+### (c)
+
+$$P(Y=0)=p(0)=\frac{\lambda^0 e^{-\lambda}}{0!}=e^{-.03}\approx.9704$$
+
+## Question 14
+
+### (a)
+
+$$\int_{-\infty}^{\infty}f(y)dy=\int_{0}^{1}c(2-y)dy=c[2y-\frac{1}{2}y^2]_{0}^{1} =\frac{3}{2}c=1 \implies c=\frac{2}{3}$$
+
+### (b)
+
+$$F(y)=\int_{-\infty}^{y}f(t)dt = \int_{0}^{y}(\frac{4}{3}-\frac{2}{3}t)dt=[\frac{4}{3}t-\frac{1}{3}t^2]_{0}^{y}=\frac{1}{3}(4y-y^2)$$
+
+### (c)
+
+$$F(.4)=\frac{1}{3}[4(.4)-(.4)^2]=.48$$
+
+### (d)
+
+$$P(.1\leq Y \leq .6)=\int_{.1}^{.6} f(y) dy=\int_{.1}^{.6}(\frac{4}{3}-\frac{2}{3}y^2)dy=[\frac{4}{3}y-\frac{1}{3}y^2]_{.1}^{.6}=[\frac{4}{3}(.6)-\frac{1}{3}(.6)^2] - [\frac{4}{3}(.1)-\frac{1}{3}(.1)^2] = .55$$
+
+## Question 15
+
+### (a)
+
+Mean
+$$E(Y)=\int_{-\infty}^{\infty}yf(y)dy=\frac{3}{500}\int_{-5}^{5}(25y-y^3)dy=\frac{3}{500}[\frac{25}{2}y^2-\frac{1}{3}y^3]_{-5}^{+5}=-.5$$
+
+Variance
+$$\delta^2=E(Y^2)-E(Y)^2\\E(Y^2)=\int_{-\infty}^{\infty}y^2f(y)dy=\frac{3}{500}\int_{-5}^{5}(25y^2-y^3)dy=\frac{3}{500}[\frac{25}{3}y^3-\frac{1}{4}y^4]_{-5}^{+5}=\frac{25}{2}\\\delta^2 = \frac{25}{2}-(\frac{-1}{2})^2=\frac{49}{4}$$
+
+### (b)
+
+Mean in hours by Theorem 5.1
+$$E(\frac{1}{60}Y) =\frac{1}{60}E(Y)=-\frac{1}{120}$$
+
+Variance in hours by Theorem 5.3
+$$V(cY)=\delta^2_{cY}=c^2\delta^2=(\frac{1}{60})(\frac{49}{4})=\frac{49}{240}$$
+
+### (c)
+
+Mean
+$$60E(Y)=-30$$
+
+
+Variance
+$$60^2\delta^2=360*\frac{49}{9}=1960$$
+
+## Question 16
+
+### (a)
+Mean = 50, Standard Deviation =3.2
+$$P(Y>45)=P(Y\geq46)\\Z=\frac{Y-\mu}{\delta}=\frac{46-50}{3.2}=-1.25\\P(Y\geq46)=P(Z\geq-1.25)=1-P(Z<-1.25)=1-.10565\approx.8944\\$$
+
+### (b)
+
+$$P(Y<55)\\Z=\frac{55-50}{3.2}=1.5625\\P(Y<55)=P(Z<1.5625)\approx.9409$$
+
+### (c)
+
+$$P(51<Y<52)=P(Y < 52) - P(Y<51)\\Z_1=\frac{52-50}{3.2}=.625\\Z_2=\frac{51-50}{3.2}=.3125\\P(Y < 52) - P(Y<51)=P(Z<.625)-P(Z<.3125)\approx.7340-.6229=.1111$$
+
+## Question 17
+
+### (a)
+Mean = 605, Standard Deviation = 185
+$$P(500<Y<700)=P(Y < 700) - P(Y<500)\\Z_1=\frac{700-605}{185}\approx.5135\\Z_2=\frac{500-605}{185}\approx-.5676\\P(Y < 700) - P(Y<500)\approx P(Z<.5135)-P(Z<-.5676)\approx.6960-.2850=.4110$$
+
+### (b)
+
+$$P(400<Y<500)=P(Y < 500) - P(Y<400)\\Z_1=\frac{500-605}{185}\approx-.5676\\Z_2=\frac{400-605}{185}\approx-1.1081\\P(Y < 500) - P(Y<400)\approx P(Z<-.5676)-P(Z<-1.1081)\approx.2850-.1339=.1511$$
+
+### (c)
+
+$$P(Y<850)=\\Z=\frac{850-605}{185}\approx1.3243\\P(Y < 850)\approx P(Z<1.3243)\approx.9073$$
+
+### (d)
+
+$$P(Y>1000)=\\Z=\frac{1000-605}{185}\approx2.1351\\P(Y >1000)\approx P(Z > 2.1351)= 1 - P(Z\leq 2.1351)\approx 1 -.9836 = .0164$$
+
+### (e)
+
+$$P(Z>\;?)=1-P(Z< \;?) =.10 = 1 - P(Z<1.28)=P(Z>1.28)\\Z=1.28=\frac{?\;-605}{185}\\?=(1.28*185)+605=841.8$$
