@@ -1,0 +1,158 @@
+---
+title: "Lab1"
+author: "Harley Combest"
+date: "`r Sys.Date()`"
+output: 
+    html_document:
+      toc: yes
+      toc_float: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Tasks
+
+## Task 1
+
+```{r}
+getwd()
+```
+
+## Task 2
+
+```{r}
+ddt <- read.csv(file = "DDT.csv")
+head(ddt, 3)
+#weights=ddt$WEIGHT
+#zScores= (weights - mean(weights))/(sd(weights))
+#zScores[abs(zScores)>3]
+#weights[abs(zScores)>3]
+#weights[abs(zScores)>=2 & abs(zScores)<=3]
+#sd(zScores)
+# P(Y=10) dbinom(10,20,.4)
+# P(13 <= Y < 17) pbinom(16, 20, .4) - pbinom(13, 20, .4)
+#P(3<= Y < 7) pbinom(6, 10, .6) - pbinom(3, 20, .6)
+# P(10 < Y <= 20) Y~N(mu=20, delta = 10) pnorm(20, 20, 10) - pnorm(10, 20, 10)
+1 - pnorm(16.1, 14.56, 10)
+pnorm(15, 12, 7) - pnorm(10, 12, 7)
+# P(Y <= 4) pbinom(4, 10, .6)
+# pnorm(5, 10, 10)
+# x=213865/417697
+# P(Y > 6) 1 - pbinom(6, 20, .4)
+1-pbinom(15, 20, .55)
+# P(Y> 20) mu = 20 sd = 6, 1 - pnorm(20, 20, 6)
+# P(Y > .5) mu = 0, sd = 1, 1 - pnorm(.5, 0, 1)
+# P(Y < 10) pbinom(9, 20, .4)
+#x
+
+```
+
+
+## Task 3
+
+1. The qualitative variables are **RIVER** and **SPECIES**.
+2. The quantitative variables are **MILE**, **LENGTH**, **WEIGHT**, and **DDT**.
+3. There are three species: **CCATFISH**, **LMBASS**, and **SMBUFFALO**.
+4.
+```{r}
+with(ddt, ddt[WEIGHT>800 & SPECIES=="LMBASS",])
+
+```
+5.
+```{r}
+with(ddt, ddt[RIVER == "SCM" & DDT>4,])
+```
+
+
+
+### Clicker questions
+
+#### Q1
+
+```{r}
+lengthsOfFishies <- c(ddt$LENGTH)
+result.mean <- mean(lengthsOfFishies)
+# b800=with(ddt, ddt[DDT>30,])
+print(result.mean)
+# mean(b800$LENGTH)
+```
+
+
+#### Q2
+
+```{r}
+weightOfFishies <- c(ddt$WEIGHT)
+result.standarddeviation <- sd(weightOfFishies)
+print(result.standarddeviation)
+```
+
+#### Q3
+
+0
+
+#### Q4
+
+```{r}
+v=1:20
+
+print(v)
+```
+20
+20/20 = 1
+
+## Task 4
+```{r}
+tableOfRivers <- table(ddt$RIVER)
+print(tableOfRivers)
+
+barPlotOfRiversKernel=with(ddt, tableOfRivers)
+library(RColorBrewer)
+colorCodes <- brewer.pal(4, "Set1")
+barPlotOfRivers <- barplot(barPlotOfRiversKernel, col=colorCodes)
+
+tableOfRiversAndSpecies <- table(ddt$SPECIES, ddt$RIVER)
+print(tableOfRiversAndSpecies)
+
+barPlotOfRiversAndSpeciesKernel=with(ddt, tableOfRiversAndSpecies)
+barPlotOfRiversAndSpecies <- barplot(barPlotOfRiversAndSpeciesKernel)
+```
+
+## Task 5
+```{r}
+tableOfSpecies <- table(ddt$SPECIES)
+labels1 <- paste(names(tableOfSpecies), "\n", tableOfSpecies, sep =" ")
+pie(tableOfSpecies, labels = labels1, main="Pie Chart of Fish Species")
+tableOfRivers <- table(ddt$RIVER)
+labels2 <- paste(names(tableOfRivers), "\n", tableOfRivers, sep =" ")
+pie(tableOfRivers, labels = labels2, main="Pie Chart of Rivers")
+```
+
+## Task 6
+```{r}
+boxplot(ddt$DDT,col="Red",data=ddt)
+boxplot(ddt$WEIGHT,col="Red",data=ddt)
+boxplot(ddt$LENGTH, col= "Red", data=ddt)
+
+```
+
+## Task 7
+```{r}
+coplot(LENGTH~WEIGHT|RIVER,data=ddt)
+coplot(DDT~WEIGHT|SPECIES, data=ddt)
+```
+
+## Task 8
+```{r}
+library(ggplot2)
+gg1 <- ggplot(data=ddt, mapping=aes(x=SPECIES, y =WEIGHT, fill = RIVER)) + geom_boxplot() + stat_summary(fun = "mean", geom = "point", shape = 8, size = 2, color = "white") + ggtitle("HARLEY COMBEST")
+gg1
+
+gg2 <- ggplot(data=ddt, mapping=aes(x=RIVER, y=LENGTH, fill=SPECIES)) + geom_violin() + ggtitle("HARLEY COMBEST")
+gg2
+
+gg3 <- ggplot(data=ddt, mapping=aes(x=WEIGHT, y=LENGTH, fill=SPECIES)) + geom_point(aes(color=SPECIES)) + ggtitle("HARLEY COMBEST")
+gg3
+```
+

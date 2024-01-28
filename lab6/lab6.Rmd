@@ -1,0 +1,270 @@
+---
+title: "lab6"
+author: "Harley Combest"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+      toc: yes
+      toc_float: yes
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Tasks
+
+
+```{r}
+(2*2)*(10*.4*.6)+(3*3)*(10*.4*.6)+(1)*(10*.4*.6)
+(2^2)*(10*.4*.6)+(3^2)*(10*.4*.6)+(10*.4*.6)
+pnorm(7, 10, sd=3) - pnorm(3, 10, 3)
+pbinom(q=6, 10, prob=.4)-pbinom(2, 10, .4)
+1 - pnorm(7,mean=5,sd=sqrt(10*.5*.5))
+```
+
+
+
+## Task 1
+
+```{r}
+getwd()
+```
+
+## Task 2
+
+```{r}
+layout(matrix(1:4, nr=2,nc=2))#this splits what's displayed into 4 areas on a single interface
+
+#These plot the normal curves of each varying mean and standard deviation given.
+curve(dnorm(x, mean=10,sd=4),xlim=c(-10,30))
+curve(dnorm(x, mean=10,sd=2),xlim=c(-10,30))
+curve(dnorm(x, mean=5,sd=10),xlim=c(-30,40))
+curve(dnorm(x, mean=5,sd=.5),xlim=c(-10,20))
+```
+
+```{r}
+#This plots a curve corresponding to info given in the prompt
+curve(dnorm(x, mean=0,sd=1),xlim=c(-10,10))
+
+# x values corresponding to the x - cords of points on the curve
+xcurve=seq(2, 10, length=1000)
+
+# Y values corresponding t0 the x values
+ycurve=dnorm(xcurve,mean=0,sd=1)
+
+# Fill in the polygon with the given vertices
+polygon(c(2,xcurve,10),c(0,ycurve,0),col="Red")
+```
+
+```{r}
+#This plots a curve corresponding to info given in the prompt
+curve(dnorm(x, mean=4,sd=2),xlim=c(-5,14))
+
+# x values corresponding to the x - cords of points on the curve
+xcurve=seq(1, 5, length=1000)
+
+# Y values corresponding t0 the x values
+ycurve=dnorm(xcurve,mean=4,sd=2)
+
+# Fill in the polygon with the given vertices
+polygon(c(1,xcurve,5),c(0,ycurve,0),col="Red")
+```
+
+```{r}
+#This plots a curve corresponding to info given in the prompt
+curve(dnorm(x, mean=10,sd=4),xlim=c(-10,30))
+
+# x values corresponding to the x - cords of points on the curve
+xcurve=seq(-10, 10, length=1000)
+
+# Y values corresponding t0 the x values
+ycurve=dnorm(xcurve,mean=10,sd=4)
+
+# Fill in the polygon with the given vertices
+polygon(c(-10,xcurve,10),c(0,ycurve,0),col="Red")
+```
+
+```{r}
+#This plots a curve corresponding to info given in the prompt
+curve(dnorm(x, mean=-2,sd=.5),xlim=c(-6,2))
+
+# x values corresponding to the x - cords of points on the curve
+xcurve=seq(-3, -2, length=1000)
+
+# Y values corresponding t0 the x values
+ycurve=dnorm(xcurve,mean=-2,sd=.5)
+
+# Fill in the polygon with the given vertices
+polygon(c(-3,xcurve,-2),c(0,ycurve,0),col="Red")
+```
+
+## Task 3
+
+```{r}
+curve(dgamma(x,shape=1,scale=1),xlim=c(0,10),ylim=c(0,1),col="red",lwd=2)
+curve(dgamma(x,shape=3,scale=1),xlim=c(0,10),ylim=c(0,1),add=TRUE,lwd=2)
+curve(dgamma(x,shape=5,scale=1),xlim=c(0,10),ylim=c(0,1),add=TRUE, col="Blue",lwd=2)
+```
+
+```{r}
+curve(dgamma(x,shape=3,scale=2),xlim=c(0,20),ylim=c(0,1),col="black",lwd=2)
+
+xcurve=seq(2, 5, length=1000)
+ycurve=dgamma(xcurve, shape = 3, scale = 2)
+polygon(c(2,xcurve,5),c(0,ycurve,0),col="Red")
+```
+
+```{r}
+curve(dgamma(x,shape=6,scale=3),xlim=c(0,50),ylim=c(0,1),col="black",lwd=2)
+
+xcurve=seq(1, 4, length=1000)
+ycurve=dgamma(xcurve, shape = 6, scale = 3)
+polygon(c(1,xcurve,4),c(0, ycurve, 0),col="Red")#doesn't appear to be anything in the given interval
+```
+
+```{r}
+curve(dgamma(x,shape=2,scale=4),xlim=c(0,10),ylim=c(0,1),col="black",lwd=2)
+
+xcurve=seq(3, 6, length=1000)
+ycurve=dgamma(xcurve, shape = 2, scale = 4)
+polygon(c(3,xcurve,6),c(0,ycurve,0),col="Red")
+```
+
+## Task 4
+
+```{r}
+layout(matrix(1:4, nr=2,nc=2))#this splits what's displayed into 4 areas on a single interface
+curve(dchisq(x,df=1),xlim=c(0,10),ylim=c(0,1),col="Red",lwd=2,
+ylab="Chisq density")
+curve(dchisq(x,df=2),xlim=c(0,10),ylim=c(0,1),col="Blue",lwd=2,
+ylab="Chisq density")
+curve(dchisq(x,df=4),xlim=c(0,10),ylim=c(0,1),col="Green",lwd=2,
+ylab="Chisq density")
+curve(dchisq(x,df=20),xlim=c(0,10),ylim=c(0,1),col="Orange",lwd=2,
+ylab="Chisq density")
+```
+
+```{r}
+curve(dchisq(x, df=2),xlim=c(0,10),ylim=c(0,1),col="black",lwd=2)
+
+xcurve=seq(2, 4, length=1000)
+ycurve=dchisq(xcurve, df=2)
+polygon(c(2,xcurve,4),c(0,ycurve,0),col="Red")
+```
+
+```{r}
+curve(dchisq(x, df=3),xlim=c(0,10),ylim=c(0,1),col="black",lwd=2)
+
+xcurve=seq(3, 5, length=1000)
+ycurve=dchisq(xcurve, df=3)
+polygon(c(3,xcurve,5),c(0,ycurve,0),col="Red")
+```
+
+```{r}
+curve(dchisq(x, df=20),xlim=c(0,40),ylim=c(0,1),col="black",lwd=2)
+
+xcurve=seq(10, 21, length=1000)
+ycurve=dchisq(xcurve, df=21)
+polygon(c(10,xcurve,21),c(0,ycurve,0),col="Red")
+```
+
+## Task 5
+
+```{r}
+layout(matrix(1:4, nr=2,nc=2))#this splits what's displayed into 4 areas on a single interface
+
+curve(dweibull(x,shape=1,scale=1),xlim=c(-2,2),ylim=c(0,4),col="red",lwd=2)
+curve(dweibull(x,shape=3,scale=1),xlim=c(-1,2),ylim=c(0,4),col='green', lwd=2)
+curve(dweibull(x,shape=5,scale=1),xlim=c(0,2),ylim=c(0,4),col="blue",lwd=2)
+curve(dweibull(x,shape=6,scale=1),xlim=c(0,2),ylim=c(0,4),col="orange",lwd=2)
+```
+
+Weibull with shape=1, scale=1, and probability of 0 to 1.
+```{r}
+curve(dweibull(x,shape=1,scale=1),xlim=c(-2,2),ylim=c(0,4),col="black",lwd=2)
+
+xcurve=seq(0, 1, length=1000)
+ycurve=dweibull(xcurve, shape = 1, scale = 1)
+polygon(c(0,xcurve,1),c(0,ycurve,0),col="Red")
+```
+
+Weibull with shape=3, scale=1, and probability of 1 to 1.333 .
+```{r}
+curve(dweibull(x,shape=3,scale=1),xlim=c(-.5,2),ylim=c(0,3),col="black",lwd=2)
+
+xcurve=seq(1, 1.3333, length=1000)
+ycurve=dweibull(xcurve, shape = 3, scale = 1)
+polygon(c(1,xcurve,1.3333),c(0,ycurve,0),col="Red")
+```
+
+Weibull with shape=17, scale=1, and probability of 0.9000 to 1.0500.
+```{r}
+curve(dweibull(x,shape=17,scale=1),xlim=c(0.5,1.5),ylim=c(0,10),col="black",lwd=2)
+
+xcurve=seq(.9, 1.05, length=1000)
+ycurve=dweibull(xcurve, shape = 17, scale = 1)
+polygon(c(.9,xcurve,1.05),c(0,ycurve,0),col="Red")
+```
+
+## Task 6
+
+```{r}
+layout(matrix(1:4, nr=2,nc=2))#this splits what's displayed into 4 areas on a single interface
+
+curve(dbeta(x,shape1=1,shape2=1),xlim=c(-1,2),ylim=c(0,2),col="red",lwd=2)
+curve(dbeta(x,shape=3,shape2=1),xlim=c(-.5,1.5),ylim=c(0,4),col='green', lwd=2)
+curve(dbeta(x,shape1=3,shape2=2),xlim=c(-.5,1.5),ylim=c(0,3),col="blue",lwd=2)
+curve(dbeta(x,shape1=5,shape2=2),xlim=c(0,1.5),ylim=c(0,3),col="orange",lwd=2)
+```
+
+Beta with shape1=7, shape2=2, and probability of 0.9000 to 1.0500.
+```{r}
+curve(dbeta(x,shape1=7,shape2=2),xlim=c(0.2,1.2),ylim=c(0,10),col="black",lwd=2)
+
+xcurve=seq(.9, 1.05, length=1000)
+ycurve=dbeta(xcurve,shape1=7,shape2=2)
+polygon(c(.9,xcurve,1.05),c(0,ycurve,0),col="Red")
+```
+Beta with shape1=300, shape2=20, and probability of 0.91 to .95.
+```{r}
+curve(dbeta(x,shape1=300,shape2=20),xlim=c(0.8,1.1),ylim=c(0,30),col="black",lwd=2)
+
+xcurve=seq(.91, .95, length=1000)
+ycurve=dbeta(xcurve,shape1=300,shape2=20)
+polygon(c(.91,xcurve,.95),c(0,ycurve,0),col="Red")
+```
+Beta with shape1=10, shape2=2, and probability of 0.5 to 0.6.
+```{r}
+curve(dbeta(x,shape1=10,shape2=2),xlim=c(.4,1.1),ylim=c(0,10),col="black",lwd=2)
+
+xcurve=seq(.5, .6, length=1000)
+ycurve=dbeta(xcurve,shape1=10,shape2=2)
+polygon(c(.5,xcurve,.6),c(0,ycurve,0),col="Red")
+```
+
+## Task 7
+
+```{r}
+myncurve = function(mu, sigma, a){
+ curve(dnorm(x,mean=mu,sd=sigma), xlim = c(mu-3*sigma, mu +
+3*sigma))
+
+  pseudoNegativeInfinity=mu+(-4*sigma)
+  xcurve=seq(pseudoNegativeInfinity, a, length=1000)
+  ycurve=dnorm(xcurve,mean=mu,sd=sigma)
+  polygon(c(pseudoNegativeInfinity,xcurve,a),c(0,ycurve,0),col="Red")
+  
+  pnorm(a, mean=mu, sd=sigma)
+  
+}
+
+#myncurve(mu = 10000, sigma = .5, a = 10000)
+myPackage1::myncurve(mu=10,sigma=5,a=6)
+```
+
+
+
+
+

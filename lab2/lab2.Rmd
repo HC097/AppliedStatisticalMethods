@@ -1,0 +1,88 @@
+---
+title: "Lab2"
+author: "Harley Combest"
+date: "`r Sys.Date()`"
+output: 
+    html_document:
+      toc: yes
+      toc_float: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Tasks
+
+## Task 1
+
+```{r}
+getwd()
+```
+
+## Task 2
+
+```{r}
+epagas=read.csv("EPAGAS.csv")
+head(epagas)
+```
+
+## Task 3
+
+```{r}
+mpg=epagas$MPG
+
+z=(mpg-mean(mpg))/(sd(mpg))
+mean(z) #pretty close to zero
+sd(z)^2
+
+print("------------------")
+
+#any mpg with an absolute z-score greater than 3 is an outlier.
+z[abs(z)>3]
+mpg[abs(z)>3]
+
+print("------------------")
+
+#possible outliers
+z[abs(z)>=2 & abs(z)<=3]
+mpg[abs(z)>=2 & abs(z)<=3]
+
+#df1=data.frame(mpgs=mpg, zscores=z)
+#df1[order(df1$mpgs, decreasing=FALSE),]
+
+library(lattice)
+mycol = ifelse(abs(z)>3, "Red",
+        ifelse(abs(z)>=2 &abs(z)<=3,"Blue", "Black"))
+dotplot(mpg, col=mycol)
+```
+
+## Task 4
+
+```{r}
+boxplot(mpg, data=epagas, main="Box plot for MPG", col="black", notch=TRUE, horizontal=TRUE)
+```
+
+By Chebyshev's Theorem 75% of the data within 2 standard deviations of the mean of the mpg data.
+
+```{r}
+boundedAbove=mean(mpg)+(2*sd(mpg))
+boundedBelow=mean(mpg)-(2*sd(mpg))
+
+numberOfMpgs=length(mpg)
+
+epagasInInterval=with(epagas, epagas[MPG >= boundedBelow & MPG <= boundedAbove,])
+
+numberOfMpgsInInterval=length(epagasInInterval)
+
+percentInInterval=numberOfMpgsInInterval/numberOfMpgs
+percentInInterval
+```
+
+Chebyshev's Theorem matches up with the data.
+
+According to The Empirical Rule, approximately 95% of the data lies within 2 standard deviations of the mean.
+
+This corresponds well.
+
+The empirical rule is valid in this case because the distribution of the data is roughly bell shaped in its relative frequencies.
