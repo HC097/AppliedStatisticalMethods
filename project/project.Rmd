@@ -1,0 +1,69 @@
+---
+title: "project"
+author: "Harley Combest"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+      toc: yes
+      toc_float: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Task 1
+
+```{r}
+#calculates the number of tickets to be sold when the number of seats in the flight is N and the probability of a "show" is p and gamma is the probability a plane will be truly overbooked (more people show than there are seats)
+ntickets <- function(N, gamma, p,...){
+  
+  #Using the appropriate discrete distribution
+  ndUpper=N+N*(1-p)
+  ndLower=N
+  
+  ndQuantile=qbinom(1-gamma, ndLower:ndUpper, p)
+  nd=N + (N-min(ndQuantile))
+  
+  if(qbinom(1-gamma, size=nd, prob=p) == N){
+    nd=N + (N-min(ndQuantile))
+  }else{
+    nd="ERROR:DISCRETE DISTRIBUTION FAILURE"
+  }
+  
+  
+  
+  #Using normal approximation
+  ncSeq=seq(from=ndLower,to=ndUpper,by=.00001)
+  distri="default"
+  for(x in ncSeq){
+    
+    if(round(qnorm(p=p,mean=x*p,sd=sqrt(x*p*(1-p))),5) == N){
+      nc=x
+      break
+    }else{
+      nc="ERROR:NORMAL APPROXIMATION FAILURE"
+    }
+  }
+  
+  #Printing a named list containing nd, nc, N, p and gamma
+  aNamedList<-list(nd=nd, nc=nc, N=N, p=p, gamma=gamma)
+  print(aNamedList)
+  
+  #plot for discrete case
+  ndSeq=seq(from=ndLower,to=ndUpper)
+  plot(ndSeq,1-gamma-pbinom(q=ndSeq,size=ndUpper-ndLower,prob=p),xlab="n",ylab="Objective Discrete")
+  
+  #plot for continuous case
+  ncSeq=seq(from=ndLower,to=ndUpper)
+  plot(ncSeq,1-gamma-pnorm(q=ncSeq,mean=mean(ncSeq),sd=sd(ncSeq)),xlab="n",ylab="Objective Continuous")
+  
+}
+```
+
+## Task 2
+
+```{r}
+ntickets(N=400,gamma = 0.02, p = 0.95)
+```
+

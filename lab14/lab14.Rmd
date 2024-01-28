@@ -1,0 +1,169 @@
+---
+title: "lab14"
+author: "Harley Combest"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+      toc: yes
+      toc_float: yes
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Tasks
+
+
+## Task 1
+
+```{r}
+getwd()
+```
+
+## Task 2
+
+```{r}
+mylsq=function(x,y){
+ssxx=sum((x-mean(x))^2 )
+ssxy=sum(  (x-mean(x))*(y-mean(y)) ) ## fill in the missing portion
+b1hat=ssxy/ssxx
+b0hat=(mean(y)- (b1hat*mean(x)) )   ##  fill in the missing portion
+
+plot1=plot(x=x,y=y)
+
+abline(coef=c(b0hat,b1hat),lwd=2,col="blue")
+
+return(list(b0hat=b0hat,b1hat=b1hat )) #fill in the missing portion
+}
+
+x=1:20
+set.seed(29);y=4+6*x + rnorm(20,0,5)
+mylsq(x=x,y=y)
+slr=lm(y~x);summary(slr)
+```
+
+## Task 3
+
+```{r}
+mypred=function(x,b0,b1){
+ym=b0+b1+mean(x)
+ym
+}
+
+xnew=15.5
+b0=3.102214
+b1=6.130737
+
+ym=mypred(x=xnew,b0=b0,b1=1)
+plot(x=x,y=y)
+abline(coef=c(b0,b1),lwd=2,col="blue")
+points(xnew,ym,cex=2,pch=1,col="blue")
+```
+
+```{r}
+sweetness=read.csv("OJUICE.csv")
+x1=sweetness$Pectin
+y1=sweetness$SweetIndex
+mylsq(x=x1,y=y1)
+```
+
+
+a) Least squares regression line: 6.252068 - 0.002310626x.
+
+b) These variables represent the set decrease of sweetness via pectin.
+
+c) 
+
+```{r}
+6.252068 - 0.002310626 * (300)
+```
+
+
+a)
+
+```{r}
+drillrock=read.csv("DRILLROCK.csv")
+plot(drillrock)
+```
+
+b)
+
+```{r}
+lm(drillrock)
+```
+
+```{r}
+x2=drillrock$DEPTH
+y2=drillrock$TIME
+scattergram1=mylsq(x=x2,y=y2)
+scattergram1
+```
+
+Least Squares Prediction: 4.789603 + 0.01438785x.
+
+c)
+
+```{r}
+plot(x=x2,y=y2)
+abline(coef = (c(4.789603,0.01438785)))
+```
+
+d)
+
+These variables represent the fixed cost of drilling.
+
+## Task 4
+
+```{r}
+mysq=function(x,y){
+n=length(x) # or y
+ssxx=sum((x-mean(x))^2 )
+ssxy=sum((x-mean(x))*(y-mean(y))) ## fill in the missing portion
+b1hat=ssxy/ssxx
+b0hat=mean(y)- (b1hat * mean(x))  ##  fill 
+yhat=b0hat+(b1hat*mean(x))  ##  fill 
+ssr=sum((y-yhat)^2)
+sq=(ssr)/(n-2)##  fill 
+return(list(ssr=ssr,sq=sq))
+}
+
+mysq(x=x,y=y)
+var(y)
+
+5.543077-5.196635
+```
+
+Pretty close. 0.346442 close.
+
+a)
+
+```{r}
+carbon=read.csv("CARBON.csv")
+x3=carbon$PilotPlant
+y3=carbon$LabFurnace
+scattergram2=plot(x=x3,y=y3)
+```
+
+b)
+
+```{r}
+mylsq(x=x3,y=y3)
+```
+
+These parameters represent the determined rise of carbon content in a lab furnace given the carbon content in a pilot plant.
+
+c)
+
+```{r}
+mysq(x=x3,y=y3)
+```
+
+d)
+
+```{r}
+sqrt(0.2477217)
+```
+
+There is a 0.4977165 carbon content average difference between lab furnace carbon content from the mean lab furnace carbon content based on pilot plant carbon content.

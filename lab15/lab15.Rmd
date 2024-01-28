@@ -1,0 +1,77 @@
+---
+title: "lab15"
+author: "Harley Combest"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+      toc: yes
+      toc_float: yes
+      
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Tasks
+
+
+## Task 1
+
+```{r}
+getwd()
+```
+
+## Task 2
+
+```{r}
+seedgerm=read.csv("SEEDGERM.csv")
+```
+
+a)
+
+```{r}
+plot(seedgerm)
+```
+
+b & c)
+
+```{r}
+mylsq=function(x,y){
+ssxx=sum((x-mean(x))^2 )
+ssxy=sum(  (x-mean(x))*(y-mean(y)) ) ## fill in the missing portion
+b1hat=ssxy/ssxx
+b0hat=(mean(y)- (b1hat*mean(x)) )   ##  fill in the missing portion
+
+plot1=plot(x=x,y=y)
+
+abline(coef=c(b0hat,b1hat),lwd=2,col="blue")
+
+return(list(b0hat=b0hat,b1hat=b1hat )) #fill in the missing portion
+}
+
+x=seedgerm$CHANGE
+y=seedgerm$TEMP
+
+mylsq(x=x,y=y)
+```
+
+311.5791 - 2.163071x
+
+d)  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
